@@ -1,10 +1,13 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
+const https = require('https');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 const SUBMISSIONS_FILE = path.join(__dirname, 'submissions.json');
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'admin123';
+const NTFY_TOPIC = process.env.NTFY_TOPIC || 'webmine-inquiries-59a8c2';
 
 // Middleware
 app.use(express.json());
@@ -35,6 +38,42 @@ function saveSubmissions(submissions) {
   }
 }
 
+// Send Push Notification via ntfy.sh
+function sendNtfyNotification(submission) {
+  const url = `https://ntfy.sh/${NTFY_TOPIC}`;
+  
+  const message = `Name: ${submission.name}\nEmail: ${submission.email}\nServices: ${submission.services.join(', ') || 'None'}\n\nDescription: ${submission.description}`;
+  
+  const options = {
+    method: 'POST',
+    headers: {
+      'Title': 'New Webmine Media Inquiry!',
+      'Priority': 'high',
+      'Tags': 'incoming_envelope,computer,iphone'
+    }
+  };
+
+  const req = https.request(url, options, (res) => {
+    console.log(`Notification sent to topic "${NTFY_TOPIC}". Status: ${res.statusCode}`);
+  });
+
+  req.on('error', (e) => {
+    console.error(`Error sending push notification: ${e.message}`);
+  });
+
+  req.write(message);
+  req.end();
+}
+
+// Authentication Middleware
+function authenticateAdmin(req, res, next) {
+  const authHeader = req.headers['authorization'];
+  if (!authHeader || authHeader !== `Bearer ${ADMIN_PASSWORD}`) {
+    return res.status(401).json({ success: false, message: 'Unauthorized access. Invalid password.' });
+  }
+  next();
+}
+
 // Routes
 
 // Serve landing page
@@ -45,6 +84,11 @@ app.get('/', (req, res) => {
 // Serve Get Started page
 app.get('/get-started', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'get-started.html'));
+});
+
+// Serve Admin Dashboard page
+app.get('/admin', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'admin.html'));
 });
 
 // POST form submissions
@@ -81,6 +125,9 @@ app.post('/api/get-started', (req, res) => {
   submissions.push(newSubmission);
 
   if (saveSubmissions(submissions)) {
+    // Send instant push notification to Mobile/Computer
+    sendNtfyNotification(newSubmission);
+
     return res.status(200).json({
       success: true,
       message: 'Thank you! Your project inquiry has been received. Our engineers will reach out shortly.'
@@ -93,10 +140,39 @@ app.post('/api/get-started', (req, res) => {
   }
 });
 
-// API endpoint to retrieve all submissions (for debugging/verification)
-app.get('/api/submissions', (req, res) => {
+// Admin Authentication POST
+app.post('/api/admin/login', (req, res) => {
+  const { password } = req.body;
+  if (password === ADMIN_PASSWORD) {
+    return res.json({ success: true, message: 'Authenticated successfully.' });
+  } else {
+    return res.status(401).json({ success: false, message: 'Invalid password. Access denied.' });
+  }
+});
+
+// GET all submissions (requires Admin Authentication)
+app.get('/api/admin/submissions', authenticateAdmin, (req, res) => {
   const submissions = getSubmissions();
-  res.json(submissions);
+  res.json({ success: true, submissions });
+});
+
+// DELETE a submission (requires Admin Authentication)
+app.delete('/api/admin/submissions/:id', authenticateAdmin, (req, res) => {
+  const { id } = req.params;
+  let submissions = getSubmissions();
+  const initialLength = submissions.length;
+  
+  submissions = submissions.filter(item => item.id !== id);
+  
+  if (submissions.length === initialLength) {
+    return res.status(404).json({ success: false, message: 'Inquiry not found.' });
+  }
+
+  if (saveSubmissions(submissions)) {
+    return res.json({ success: true, message: 'Inquiry deleted successfully.' });
+  } else {
+    return res.status(500).json({ success: false, message: 'Failed to delete record.' });
+  }
 });
 
 // Start Server

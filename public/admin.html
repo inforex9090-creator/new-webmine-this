@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Admin Dashboard | Webmine Media</title>
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Anybody:wght@400;600;700;800&family=Hanken+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=block" rel="stylesheet">
+  
+  <!-- Tailwind & Custom CSS -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link rel="stylesheet" href="/styles.css">
+  
+  <script id="tailwind-config">
+    try {
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-surface": "#e3e2e7",
+              "surface-container": "#1e1f23",
+              "secondary-fixed": "#e4e2e4",
+              "tertiary-container": "#919092",
+              "secondary": "#c8c6c8",
+              "primary-container": "#ff5545",
+              "on-primary-container": "#5c0002",
+              "on-primary": "#690003",
+              "error-container": "#93000a",
+              "error": "#ffb4ab",
+              "inverse-surface": "#e3e2e7",
+              "on-surface-variant": "#e7bdb7",
+              "surface": "#121317",
+              "outline-variant": "#5d3f3b",
+              "surface-bright": "#38393d",
+              "surface-container-high": "#292a2e",
+              "primary": "#ffb4aa",
+              "surface-dim": "#121317",
+              "tertiary": "#c8c6c8",
+              "surface-tint": "#ffb4aa",
+              "background": "#121317",
+              "surface-container-low": "#1a1b1f",
+              "surface-container-lowest": "#0d0e12",
+              "surface-variant": "#343539"
+            },
+            borderRadius: {
+              "DEFAULT": "0.125rem",
+              "lg": "0.25rem",
+              "xl": "0.5rem",
+              "full": "0.75rem"
+            },
+            fontFamily: {
+              "display-hero": ["Anybody"],
+              "body-lg": ["Hanken Grotesk"],
+              "label-caps": ["Space Mono"],
+              "headline-md": ["Anybody"],
+              "headline-lg": ["Anybody"],
+              "body-md": ["Hanken Grotesk"],
+              "button-text": ["Anybody"]
+            }
+          }
+        }
+      }
+    } catch (_e) {}
+  </script>
+</head>
+<body class="bg-surface text-on-surface font-body-md overflow-x-hidden selection:bg-primary selection:text-on-primary">
+
+  <!-- Header -->
+  <header class="bg-surface/80 backdrop-blur-md border-b border-outline-variant fixed top-0 w-full z-50 h-20">
+    <nav class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 max-w-container-max mx-auto h-full w-full">
+      <a href="/" class="flex items-center gap-2 text-[20px] md:text-headline-md font-display-hero tracking-tighter text-primary uppercase">
+        WEB<span class="text-on-surface">MINE</span> MEDIA
+      </a>
+      <div class="flex items-center gap-4">
+        <a href="/" class="text-secondary hover:text-primary transition-colors text-sm font-semibold flex items-center gap-1">
+          <span class="material-symbols-outlined text-lg">home</span> Home
+        </a>
+        <button id="logout-btn" class="hidden bg-surface-container border border-outline-variant px-4 py-2 rounded text-xs font-semibold hover:bg-surface-container-high transition-colors">
+          Logout
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Login Section -->
+  <div id="login-section" class="pixel-grid min-h-screen pt-28 pb-20 flex items-center justify-center">
+    <div class="w-full max-w-md px-margin-mobile relative z-10">
+      <div class="border-2 border-primary-container overflow-hidden rounded-xl bg-surface-container-high hard-shadow">
+        <div class="window-header-red flex justify-between items-center px-4">
+          <div class="flex items-center gap-1.5">
+            <div class="window-dot"></div><div class="window-dot"></div><div class="window-dot"></div>
+          </div>
+          <span class="text-xs font-label-caps text-on-surface-variant uppercase">Admin Gate</span>
+        </div>
+        <div class="p-8">
+          <h1 class="font-display-hero text-[28px] text-primary uppercase mb-2">Access Portal</h1>
+          <p class="text-on-surface-variant text-sm mb-6">Enter password to view and manage inquiries.</p>
+          
+          <div id="login-error" class="hidden mb-4 p-3 bg-error-container text-on-error-container border-l-4 border-error rounded text-xs font-semibold">
+            Invalid password. Please try again.
+          </div>
+
+          <form id="login-form" class="space-y-4">
+            <div class="flex flex-col gap-2">
+              <label for="password" class="font-label-caps text-xs text-primary uppercase">Password</label>
+              <input type="password" id="password" required
+                class="bg-surface border border-outline-variant rounded p-3 text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors">
+            </div>
+            <button type="submit" class="w-full bg-primary text-on-primary font-bold py-3 rounded-lg hard-shadow active:scale-95 transition-transform mt-2">
+              Verify Credentials
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dashboard Section (Hidden by default) -->
+  <div id="dashboard-section" class="pixel-grid min-h-screen pt-28 pb-20 hidden">
+    <div class="container mx-auto px-margin-mobile md:px-margin-desktop max-w-container-max relative z-10">
+      
+      <!-- Top banner for Push notifications settings -->
+      <div class="border border-primary/20 bg-surface-container-low p-6 rounded-xl mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+        <div>
+          <h3 class="font-display-hero text-lg text-primary uppercase mb-1">📱 Receive Alerts on Mobile</h3>
+          <p class="text-xs text-on-surface-variant">Get instant alerts on your phone whenever a client submits a form. Follow these instructions:</p>
+          <ol class="list-decimal list-inside text-xs text-on-surface-variant mt-2 space-y-1">
+            <li>Download the free **ntfy** app on your phone (Android/iOS).</li>
+            <li>Tap **+ (Subscribe)** and enter this topic: <code class="text-primary font-bold bg-surface px-1.5 py-0.5 rounded ml-1">webmine-inquiries-59a8c2</code></li>
+          </ol>
+        </div>
+        <a href="https://ntfy.sh/webmine-inquiries-59a8c2" target="_blank" class="bg-primary text-on-primary px-4 py-2.5 rounded text-xs font-bold hard-shadow shrink-0">
+          Open Web Stream
+        </a>
+      </div>
+
+      <!-- Header actions -->
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+        <div>
+          <h1 class="font-display-hero text-[28px] md:text-headline-lg text-primary uppercase leading-none">Inquiries Inbox</h1>
+          <p class="text-sm text-on-surface-variant mt-2">Manage customer leads and onboarding submissions.</p>
+        </div>
+        <div class="flex items-center gap-3 w-full md:w-auto">
+          <input type="text" id="search-bar" placeholder="Search inquiries..." 
+            class="bg-surface-container-high border border-outline-variant rounded px-4 py-2.5 text-sm outline-none focus:border-primary w-full md:w-64">
+          <button id="refresh-btn" class="bg-surface-container border border-outline-variant p-2.5 rounded hover:bg-surface-container-high transition-colors" title="Refresh">
+            <span class="material-symbols-outlined text-[20px] block">refresh</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Submissions Table Card -->
+      <div class="border border-outline-variant bg-surface-container-high rounded-xl overflow-hidden shadow-xl">
+        <div class="overflow-x-auto no-scrollbar">
+          <table class="w-full text-left text-sm border-collapse">
+            <thead>
+              <tr class="bg-surface-container border-b border-outline-variant font-label-caps text-xs text-primary uppercase tracking-wider">
+                <th class="p-4 md:p-6">Date</th>
+                <th class="p-4 md:p-6">Client</th>
+                <th class="p-4 md:p-6">Services</th>
+                <th class="p-4 md:p-6">Project Requirements</th>
+                <th class="p-4 md:p-6 text-center">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="inbox-tbody" class="divide-y divide-outline-variant/30">
+              <!-- Submissions rows will load here -->
+            </tbody>
+          </table>
+        </div>
+        
+        <!-- Empty inbox view -->
+        <div id="empty-inbox" class="hidden text-center py-20 bg-surface-container-high">
+          <span class="material-symbols-outlined text-[64px] text-tertiary mb-3">inbox</span>
+          <p class="text-on-surface-variant font-semibold">No inquiries in your inbox.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Detail Modal -->
+  <div id="detail-modal" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 hidden p-margin-mobile">
+    <div class="bg-surface-container-high border border-outline-variant rounded-xl max-w-lg w-full overflow-hidden shadow-2xl animate-fade-in">
+      <div class="window-header-red flex justify-between items-center px-4">
+        <span class="text-xs font-label-caps text-on-surface-variant uppercase">Inquiry Dossier</span>
+        <button id="modal-close" class="text-on-surface hover:text-primary"><span class="material-symbols-outlined text-base block">close</span></button>
+      </div>
+      <div class="p-6 md:p-8 space-y-4">
+        <div class="border-b border-outline-variant/30 pb-4">
+          <h2 class="font-display-hero text-xl text-primary uppercase" id="modal-client-name"></h2>
+          <p class="text-sm text-on-surface-variant" id="modal-client-email"></p>
+        </div>
+        <div>
+          <span class="font-label-caps text-xs text-primary uppercase">Services Selected</span>
+          <div id="modal-services" class="flex flex-wrap gap-2 mt-1"></div>
+        </div>
+        <div>
+          <span class="font-label-caps text-xs text-primary uppercase">Project Requirements</span>
+          <p class="text-sm text-on-surface mt-1 whitespace-pre-line leading-relaxed" id="modal-description"></p>
+        </div>
+        <div class="flex justify-between items-center pt-4 border-t border-outline-variant/30 text-xs text-on-surface-variant font-label-caps">
+          <span id="modal-date"></span>
+          <span id="modal-id"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let inquiries = [];
+    const searchBar = document.getElementById('search-bar');
+    const refreshBtn = document.getElementById('refresh-btn');
+    const logoutBtn = document.getElementById('logout-btn');
+
+    // Authentication Checks
+    const loginSection = document.getElementById('login-section');
+    const dashboardSection = document.getElementById('dashboard-section');
+    const loginForm = document.getElementById('login-form');
+    const loginError = document.getElementById('login-error');
+
+    function checkAuth() {
+      const token = localStorage.getItem('admin_token');
+      if (token) {
+        loginSection.classList.add('hidden');
+        dashboardSection.classList.remove('hidden');
+        logoutBtn.classList.remove('hidden');
+        loadInquiries();
+      } else {
+        loginSection.classList.remove('hidden');
+        dashboardSection.classList.add('hidden');
+        logoutBtn.classList.add('hidden');
+      }
+    }
+
+    loginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      loginError.classList.add('hidden');
+      const password = document.getElementById('password').value;
+
+      try {
+        const response = await fetch('/api/admin/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ password })
+        });
+
+        const result = await response.json();
+        if (response.ok && result.success) {
+          localStorage.setItem('admin_token', password);
+          checkAuth();
+        } else {
+          loginError.classList.remove('hidden');
+        }
+      } catch (err) {
+        console.error("Login request failed:", err);
+        loginError.classList.remove('hidden');
+      }
+    });
+
+    logoutBtn.addEventListener('click', () => {
+      localStorage.removeItem('admin_token');
+      document.getElementById('password').value = '';
+      checkAuth();
+    });
+
+    // Submissions Retrieval
+    async function loadInquiries() {
+      const token = localStorage.getItem('admin_token');
+      if (!token) return;
+
+      try {
+        const response = await fetch('/api/admin/submissions', {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+
+        if (response.status === 401) {
+          localStorage.removeItem('admin_token');
+          checkAuth();
+          return;
+        }
+
+        const data = await response.json();
+        if (response.ok && data.success) {
+          inquiries = data.submissions || [];
+          inquiries.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+          renderInquiries(inquiries);
+        }
+      } catch (error) {
+        console.error("Failed to load submissions:", error);
+      }
+    }
+
+    // Render Submissions Table
+    const tbody = document.getElementById('inbox-tbody');
+    const emptyInbox = document.getElementById('empty-inbox');
+
+    function renderInquiries(list) {
+      tbody.innerHTML = '';
+      if (list.length === 0) {
+        emptyInbox.classList.remove('hidden');
+        return;
+      }
+      emptyInbox.classList.add('hidden');
+
+      list.forEach(inquiry => {
+        const row = document.createElement('tr');
+        row.className = "hover:bg-surface-container/30 transition-colors cursor-pointer";
+        row.onclick = (e) => {
+          // Prevent action trigger when clicking inside buttons
+          if (e.target.closest('button')) return;
+          openModal(inquiry);
+        };
+
+        const formattedDate = new Date(inquiry.createdAt).toLocaleDateString(undefined, {
+          month: 'short',
+          day: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit'
+        });
+
+        // Services labels
+        const servicesHtml = inquiry.services.map(s => 
+          `<span class="bg-primary/10 text-primary border border-primary/20 text-xs px-2.5 py-0.5 rounded font-semibold whitespace-nowrap">${s}</span>`
+        ).join(' ') || '<span class="text-tertiary/60 text-xs italic">None</span>';
+
+        row.innerHTML = `
+          <td class="p-4 md:p-6 font-label-caps text-xs text-on-surface-variant">${formattedDate}</td>
+          <td class="p-4 md:p-6 font-bold">
+            <div class="text-on-surface">${inquiry.name}</div>
+            <div class="text-xs text-on-surface-variant font-normal mt-0.5">${inquiry.email}</div>
+          </td>
+          <td class="p-4 md:p-6">${servicesHtml}</td>
+          <td class="p-4 md:p-6 max-w-xs truncate text-on-surface-variant">${inquiry.description}</td>
+          <td class="p-4 md:p-6 text-center">
+            <div class="flex items-center justify-center gap-2">
+              <button onclick="openModal(${JSON.stringify(inquiry).replace(/"/g, '&quot;')})" 
+                class="p-2 text-primary hover:bg-primary/10 rounded transition-colors" title="View details">
+                <span class="material-symbols-outlined text-[18px] block">visibility</span>
+              </button>
+              <button onclick="deleteInquiry('${inquiry.id}', this)" 
+                class="p-2 text-error hover:bg-error-container/20 rounded transition-colors" title="Delete lead">
+                <span class="material-symbols-outlined text-[18px] block">delete</span>
+              </button>
+            </div>
+          </td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+
+    // Search and Filters
+    searchBar.addEventListener('input', () => {
+      const query = searchBar.value.toLowerCase();
+      const filtered = inquiries.filter(item => 
+        item.name.toLowerCase().includes(query) || 
+        item.email.toLowerCase().includes(query) || 
+        item.description.toLowerCase().includes(query) ||
+        item.services.some(s => s.toLowerCase().includes(query))
+      );
+      renderInquiries(filtered);
+    });
+
+    refreshBtn.addEventListener('click', loadInquiries);
+
+    // Delete submission
+    async function deleteInquiry(id, btn) {
+      if (!confirm("Are you sure you want to delete this inquiry? This action is irreversible.")) return;
+
+      const token = localStorage.getItem('admin_token');
+      if (!token) return;
+
+      // Disable button during delete
+      btn.disabled = true;
+      
+      try {
+        const response = await fetch(`/api/admin/submissions/${id}`, {
+          method: 'DELETE',
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+
+        const result = await response.json();
+        if (response.ok && result.success) {
+          // Reload
+          loadInquiries();
+        } else {
+          alert(result.message || 'Failed to delete lead.');
+          btn.disabled = false;
+        }
+      } catch (err) {
+        console.error("Delete request failed:", err);
+        alert('Network error: Failed to connect to server.');
+        btn.disabled = false;
+      }
+    }
+
+    // Modal Handling
+    const modal = document.getElementById('detail-modal');
+    const modalClose = document.getElementById('modal-close');
+
+    function openModal(inquiry) {
+      document.getElementById('modal-client-name').innerText = inquiry.name;
+      document.getElementById('modal-client-email').innerText = inquiry.email;
+      document.getElementById('modal-description').innerText = inquiry.description;
+      
+      const date = new Date(inquiry.createdAt).toLocaleString();
+      document.getElementById('modal-date').innerText = `Submitted: ${date}`;
+      document.getElementById('modal-id').innerText = `ID: ${inquiry.id}`;
+
+      // Services chips
+      const chipsContainer = document.getElementById('modal-services');
+      chipsContainer.innerHTML = '';
+      if (inquiry.services.length === 0) {
+        chipsContainer.innerHTML = '<span class="text-xs text-on-surface-variant italic">No services selected</span>';
+      } else {
+        inquiry.services.forEach(s => {
+          const chip = document.createElement('span');
+          chip.className = "bg-primary/10 text-primary border border-primary/20 text-xs px-2.5 py-0.5 rounded font-semibold";
+          chip.innerText = s;
+          chipsContainer.appendChild(chip);
+        });
+      }
+
+      modal.classList.remove('hidden');
+    }
+
+    function closeModal() {
+      modal.classList.add('hidden');
+    }
+
+    modalClose.addEventListener('click', closeModal);
+    
+    // Close modal on click outside content card
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+
+    // Key Escape closes modal
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    // Check auth on load
+    checkAuth();
+  </script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+/* Custom Utilities & Premium Styles for Webmine Media */
+
+/* Custom Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 15px rgba(255, 85, 69, 0.2); }
+  50% { box-shadow: 0 0 25px rgba(255, 85, 69, 0.5); }
+}
+
+/* Background Grids */
+.pixel-grid {
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Premium Hard Shadows */
+.hard-shadow {
+  box-shadow: 4px 4px 0px 0px #ff5545;
+  transition: all 0.15s ease-in-out;
+}
+
+.hard-shadow:active {
+  box-shadow: 0px 0px 0px 0px #ff5545;
+  transform: translate(4px, 4px);
+}
+
+.hard-shadow-red {
+  box-shadow: 4px 4px 0px 0px #ff5545;
+  transition: all 0.15s ease-in-out;
+}
+
+.hard-shadow-red:active {
+  box-shadow: 0px 0px 0px 0px #ff5545;
+  transform: translate(4px, 4px);
+}
+
+/* Retro Window Decorator */
+.window-header-red {
+  background: linear-gradient(90deg, #ff5545 0%, #690003 100%);
+  height: 24px;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  gap: 4px;
+}
+
+.window-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Glassmorphism Cards */
+.glass-card {
+  background: rgba(30, 31, 35, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 85, 69, 0.1);
+  transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+  border-color: rgba(255, 85, 69, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Custom Scrollbar */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Hover Scaling and Animations */
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.pulse-glow-hover:hover {
+  animation: pulse-glow 2s infinite;
+}

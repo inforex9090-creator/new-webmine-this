@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Webmine Media | Premium Web Design & High-Velocity Hosting</title>
+  <meta name="description" content="Webmine Media delivers high-performance web design and secure, scalable cloud hosting infrastructure for modern enterprises.">
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Anybody:wght@400;600;700;800&family=Hanken+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=block" rel="stylesheet">
+  
+  <!-- Tailwind & Custom CSS -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link rel="stylesheet" href="/styles.css">
+  
+  <script id="tailwind-config">
+    try {
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-surface": "#e3e2e7",
+              "surface-container": "#1e1f23",
+              "secondary-fixed": "#e4e2e4",
+              "tertiary-container": "#919092",
+              "secondary": "#c8c6c8",
+              "primary-container": "#ff5545",
+              "on-primary-container": "#5c0002",
+              "on-primary": "#690003",
+              "error-container": "#93000a",
+              "error": "#ffb4ab",
+              "inverse-surface": "#e3e2e7",
+              "on-surface-variant": "#e7bdb7",
+              "surface": "#121317",
+              "outline-variant": "#5d3f3b",
+              "surface-bright": "#38393d",
+              "surface-container-high": "#292a2e",
+              "primary": "#ffb4aa",
+              "surface-dim": "#121317",
+              "tertiary": "#c8c6c8",
+              "surface-tint": "#ffb4aa",
+              "background": "#121317",
+              "surface-container-low": "#1a1b1f",
+              "surface-container-lowest": "#0d0e12",
+              "surface-variant": "#343539"
+            },
+            borderRadius: {
+              "DEFAULT": "0.125rem",
+              "lg": "0.25rem",
+              "xl": "0.5rem",
+              "full": "0.75rem"
+            },
+            spacing: {
+              "margin-mobile": "16px",
+              "margin-desktop": "64px",
+              "base": "8px",
+              "gutter": "24px",
+              "container-max": "1280px",
+              "stack-lg": "64px",
+              "stack-md": "32px",
+              "stack-sm": "12px"
+            },
+            fontFamily: {
+              "display-hero": ["Anybody"],
+              "body-lg": ["Hanken Grotesk"],
+              "label-caps": ["Space Mono"],
+              "headline-md": ["Anybody"],
+              "headline-lg": ["Anybody"],
+              "body-md": ["Hanken Grotesk"],
+              "button-text": ["Anybody"]
+            }
+          }
+        }
+      }
+    } catch (_e) {}
+  </script>
+</head>
+<body class="bg-surface text-on-surface font-body-md overflow-x-hidden selection:bg-primary selection:text-on-primary">
+
+  <!-- Header Component -->
+  <header class="bg-surface/80 backdrop-blur-md border-b border-outline-variant fixed top-0 w-full z-50 h-20">
+    <nav class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 max-w-container-max mx-auto h-full w-full">
+      <a href="/" class="flex items-center gap-2 text-[20px] md:text-headline-md font-display-hero tracking-tighter text-primary uppercase">
+        WEB<span class="text-on-surface">MINE</span> MEDIA
+      </a>
+      
+      <!-- Desktop Navigation Menu -->
+      <div class="hidden md:flex gap-gutter items-center">
+        <a class="text-primary font-bold border-b-2 border-primary pb-1 font-body-md text-body-md" href="#services">Services</a>
+        <a class="text-secondary hover:text-primary transition-colors font-body-md text-body-md" href="#process">Process</a>
+        <a class="text-secondary hover:text-primary transition-colors font-body-md text-body-md" href="#about">About</a>
+        <a class="text-secondary hover:text-primary transition-colors font-body-md text-body-md" href="#guarantee">Guarantee</a>
+      </div>
+      
+      <!-- Header CTAs -->
+      <div class="flex items-center gap-4">
+        <a href="/get-started" class="hidden sm:inline-block bg-primary text-on-primary px-6 py-3 rounded font-button-text text-button-text hard-shadow active:scale-95 transition-all text-center">
+          Get Started
+        </a>
+        <button class="md:hidden p-2 text-primary" id="mobile-menu-trigger" aria-label="Open Menu">
+          <span class="material-symbols-outlined text-[32px]">menu</span>
+        </button>
+      </div>
+    </nav>
+    
+    <!-- Mobile Menu Overlay -->
+    <div class="fixed inset-0 bg-surface-dim z-[60] flex flex-col p-margin-mobile hidden" id="mobile-menu">
+      <div class="flex justify-between items-center mb-stack-lg">
+        <span class="text-[20px] font-display-hero font-extrabold tracking-tighter text-primary uppercase">WEB<span class="text-on-surface">MINE</span> MEDIA</span>
+        <button class="text-on-surface" id="mobile-menu-close" aria-label="Close Menu">
+          <span class="material-symbols-outlined text-[32px]">close</span>
+        </button>
+      </div>
+      <div class="flex flex-col gap-stack-md text-center">
+        <a class="text-[28px] font-display-hero font-bold text-primary" href="#services" id="mobile-link-services">Services</a>
+        <a class="text-[28px] font-display-hero font-bold text-on-surface" href="#process" id="mobile-link-process">Process</a>
+        <a class="text-[28px] font-display-hero font-bold text-on-surface" href="#about" id="mobile-link-about">About</a>
+        <a class="text-[28px] font-display-hero font-bold text-on-surface" href="#guarantee" id="mobile-link-guarantee">Guarantee</a>
+        <a href="/get-started" class="mt-stack-md bg-primary-container text-on-primary-container py-4 font-bold rounded-lg hard-shadow text-center">
+          GET A QUOTE
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="pixel-grid pt-20">
+    
+    <!-- Hero Section -->
+    <section class="relative min-h-[85vh] flex items-center pt-stack-lg overflow-hidden">
+      <div class="absolute top-20 -right-20 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-primary/10 blur-[120px] rounded-full pointer-events-none"></div>
+      <div class="container mx-auto px-margin-mobile md:px-margin-desktop relative z-10">
+        <div class="max-w-4xl text-left">
+          <span class="font-label-caps text-label-caps text-primary tracking-[0.2em] mb-4 block uppercase">Premium Digital Infrastructure</span>
+          <h1 class="font-display-hero text-[40px] md:text-display-hero leading-tight md:leading-none mb-base uppercase">
+            HIGH-VELOCITY <br class="hidden md:block">
+            <span class="text-primary">WEB DESIGN</span> <br>
+            <span class="text-on-surface-variant">&amp; CLOUD HOSTING</span>
+          </h1>
+          <p class="font-body-lg text-[18px] md:text-headline-md text-on-surface-variant mt-stack-sm mb-stack-md max-w-2xl">
+            Webmine Media delivers ultra-fast hosting solutions and cutting-edge web design tailored for scale. We build the digital foundation your business deserves.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4">
+            <a href="/get-started" class="inline-block bg-primary text-on-primary px-10 py-5 rounded font-button-text text-button-text hard-shadow text-lg text-center">
+              Consult Our Experts
+            </a>
+            <a href="/get-started" class="inline-block bg-surface-container border border-outline-variant px-10 py-5 rounded font-button-text text-button-text hover:bg-surface-container-high text-lg text-center transition-colors">
+              Get a Quote
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Metrics Bar -->
+    <section class="bg-surface-container-low py-stack-md border-y border-outline-variant/20">
+      <div class="container mx-auto px-margin-mobile md:px-margin-desktop grid grid-cols-1 sm:grid-cols-2 gap-gutter text-center">
+        <div class="py-4">
+          <div class="font-display-hero text-[36px] md:text-headline-lg text-primary">99.9%</div>
+          <div class="font-label-caps text-label-caps opacity-60">UPTIME GUARANTEE</div>
+        </div>
+        <div class="py-4 border-t sm:border-t-0 sm:border-l border-outline-variant/20">
+          <div class="font-display-hero text-[36px] md:text-headline-lg text-primary">24/7</div>
+          <div class="font-label-caps text-label-caps opacity-60">ENGINEER SUPPORT</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-stack-lg bg-surface scroll-mt-20">
+      <div class="container mx-auto px-margin-mobile md:px-margin-desktop">
+        <div class="mb-stack-md text-center">
+          <h2 class="font-display-hero text-[32px] md:text-headline-lg mb-base uppercase">Core Specialized Services</h2>
+          <div class="h-1 w-24 bg-primary mx-auto"></div>
+        </div>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-gutter">
+          <!-- Service 1 -->
+          <div class="border-2 border-primary-container overflow-hidden rounded-xl bg-surface-container-high flex flex-col hard-shadow">
+            <div class="window-header-red">
+              <div class="window-dot"></div><div class="window-dot"></div><div class="window-dot"></div>
+            </div>
+            <div class="p-10 flex-1 flex flex-col justify-between">
+              <div>
+                <div class="font-display-hero text-headline-lg text-primary mb-4 opacity-50">01</div>
+                <h3 class="font-display-hero text-[24px] font-bold text-on-surface mb-4">Custom Web Design</h3>
+                <p class="text-on-surface-variant text-lg mb-6">Bespoke UI/UX design focused on conversion, speed, and premium brand storytelling.</p>
+                <ul class="space-y-3 text-on-surface mb-8">
+                  <li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> Responsive Architecture</li>
+                  <li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> Conversion Optimization</li>
+                  <li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> Enterprise CMS Integration</li>
+                </ul>
+              </div>
+              <a href="/get-started" class="w-full bg-on-surface text-surface py-3 font-bold rounded-lg text-center hover:bg-on-surface/90 transition-colors inline-block">
+                Start Design
+              </a>
+            </div>
+          </div>
+          
+          <!-- Service 2 -->
+          <div class="border-2 border-primary-container overflow-hidden rounded-xl bg-surface-container-high flex flex-col hard-shadow">
+            <div class="window-header-red">
+              <div class="window-dot"></div><div class="window-dot"></div><div class="window-dot"></div>
+            </div>
+            <div class="p-10 flex-1 flex flex-col justify-between">
+              <div>
+                <div class="font-display-hero text-headline-lg text-primary mb-4 opacity-50">02</div>
+                <h3 class="font-display-hero text-[24px] font-bold text-on-surface mb-4">Managed Security</h3>
+                <p class="text-on-surface-variant text-lg mb-6">Fortress-like enterprise security modules safeguarding your digital capital daily.</p>
+                <ul class="space-y-3 text-on-surface mb-8">
+                  <li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> Advanced DDoS Protection</li>
+                  <li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> Intrusion Prevention (IPS)</li>
+                  <li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> Automated Daily Backups</li>
+                </ul>
+              </div>
+              <a href="/get-started" class="w-full bg-surface border border-outline-variant text-on-surface py-3 font-bold rounded-lg text-center hover:bg-surface-container-high transition-colors inline-block">
+                Request Audit
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Design Process Section -->
+    <section id="process" class="py-stack-lg px-margin-mobile md:px-margin-desktop bg-surface-container-low scroll-mt-20">
+      <div class="container mx-auto max-w-container-max">
+        <h2 class="font-display-hero text-[32px] md:text-headline-lg text-on-surface mb-stack-md uppercase">Our <span class="text-primary">Design Process</span></h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Step 1 -->
+          <div class="glass-card p-6 rounded-xl flex gap-4">
+            <div class="font-display-hero text-[32px] leading-none shrink-0 text-primary">1</div>
+            <div>
+              <h4 class="font-bold text-on-surface mb-1">Strategy &amp; Scope</h4>
+              <p class="text-body-md text-on-surface-variant">Defining project goals, technical requirements, and target user paths.</p>
+            </div>
+          </div>
+          <!-- Step 2 -->
+          <div class="glass-card p-6 rounded-xl flex gap-4">
+            <div class="font-display-hero text-[32px] leading-none shrink-0 text-primary">2</div>
+            <div>
+              <h4 class="font-bold text-on-surface mb-1">Wireframing</h4>
+              <p class="text-body-md text-on-surface-variant">Architecting the structure before we apply the high-end visual layers.</p>
+            </div>
+          </div>
+          <!-- Step 3 -->
+          <div class="glass-card p-6 rounded-xl flex gap-4">
+            <div class="font-display-hero text-[32px] leading-none shrink-0 text-primary">3</div>
+            <div>
+              <h4 class="font-bold text-on-surface mb-1">Visual Design</h4>
+              <p class="text-body-md text-on-surface-variant">Applying brand identity and modern UI patterns for a premium feel.</p>
+            </div>
+          </div>
+          <!-- Step 4 -->
+          <div class="glass-card p-6 rounded-xl flex gap-4">
+            <div class="font-display-hero text-[32px] leading-none shrink-0 text-primary">4</div>
+            <div>
+              <h4 class="font-bold text-on-surface mb-1">Launch &amp; Host</h4>
+              <p class="text-body-md text-on-surface-variant">Deployment on our high-speed cloud infrastructure for maximum performance.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Detailed Content / SEO Section -->
+    <section id="about" class="py-stack-lg bg-surface relative overflow-hidden scroll-mt-20">
+      <div class="absolute inset-0 opacity-5 pointer-events-none">
+        <div class="grid grid-cols-12 h-full">
+          <div class="border-r border-on-surface"></div><div class="border-r border-on-surface"></div><div class="border-r border-on-surface"></div><div class="border-r border-on-surface"></div><div class="border-r border-on-surface"></div><div class="border-r border-on-surface"></div><div class="border-r border-on-surface"></div><div class="border-r border-on-surface"></div><div class="border-r border-on-surface"></div><div class="border-r border-on-surface"></div><div class="border-r border-on-surface"></div>
+        </div>
+      </div>
+      <div class="container mx-auto px-margin-mobile md:px-margin-desktop relative z-10 max-w-4xl">
+        <div class="mb-stack-md text-left">
+          <h2 class="font-display-hero text-[32px] md:text-headline-lg text-primary mb-stack-sm uppercase">Pioneers of Web Performance</h2>
+          <div class="space-y-6 text-on-surface-variant text-[18px] leading-relaxed">
+            <p>Webmine stands as a specialized technology partner in the competitive landscape of high-performance web infrastructure. As a leading web design and hosting firm, we redefine digital presence through technical excellence. Our focus on raw speed and impenetrable security ensures your business stays ahead.</p>
+            <p>Our commitment to cutting-edge web architecture and enterprise-grade hosting means that every project we deliver is a high-availability asset. At Webmine, we bridge the gap between aesthetic design and hardcore technical engineering.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Commitments Section -->
+    <section id="guarantee" class="py-stack-lg px-margin-mobile md:px-margin-desktop bg-surface-container-low scroll-mt-20">
+      <div class="container mx-auto max-w-container-max">
+        <h2 class="font-display-hero text-[32px] md:text-headline-lg text-on-surface mb-stack-md uppercase">The Webmine <span class="text-primary">Guarantee</span></h2>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+          <div class="p-8 border-l-4 border-primary-container bg-surface-container rounded-r-lg">
+            <h4 class="text-primary-container font-display-hero text-[18px] font-bold mb-2 uppercase">Speed First</h4>
+            <p class="text-body-md text-on-surface-variant">Every site we build and host is optimized for sub-second load times, securing high engagement and conversion rates.</p>
+          </div>
+          <div class="p-8 border-l-4 border-on-primary-fixed-variant bg-surface-container rounded-r-lg">
+            <h4 class="text-primary font-display-hero text-[18px] font-bold mb-2 uppercase">Scalability</h4>
+            <p class="text-body-md text-on-surface-variant">Our cloud clusters grow automatically with your traffic peaks, from basic marketing sites to full-scale web platforms.</p>
+          </div>
+          <div class="p-8 border-l-4 border-primary-container bg-surface-container rounded-r-lg">
+            <h4 class="text-primary-container font-display-hero text-[18px] font-bold mb-2 uppercase">Expert Engineers</h4>
+            <p class="text-body-md text-on-surface-variant">Skip first-line support. Speak directly to systems engineers and UX designers who know your tech stack inside out.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-stack-lg bg-primary text-on-primary relative overflow-hidden">
+      <div class="container mx-auto px-margin-mobile md:px-margin-desktop text-center relative z-10">
+        <h2 class="font-display-hero text-headline-lg-mobile md:text-headline-lg mb-stack-sm uppercase">Deploy Your Next Big Project with Webmine Media</h2>
+        <p class="text-lg md:text-xl font-body-lg opacity-90 mb-stack-md max-w-2xl mx-auto">Scalable infrastructure and premium design at your fingertips. Collaborate with our engineers today.</p>
+        <a href="/get-started" class="inline-block bg-surface text-primary px-12 py-6 rounded-full font-button-text text-xl hard-shadow hover:translate-y-[-4px] transition-all">
+          Start Building Now
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer Component -->
+  <footer class="bg-surface-container-lowest border-t border-outline-variant">
+    <div class="flex flex-col lg:flex-row justify-between items-center px-margin-mobile md:px-margin-desktop py-12 gap-gutter max-w-container-max mx-auto w-full">
+      <div class="flex flex-col gap-2 text-center lg:text-left">
+        <div class="font-display-hero text-[20px] text-primary uppercase">Webmine Media</div>
+        <p class="font-label-caps text-xs text-tertiary">High-Velocity Infrastructure.</p>
+      </div>
+      
+      <div class="flex flex-wrap justify-center gap-gutter font-label-caps text-xs">
+        <a class="text-tertiary hover:text-on-surface transition-colors" href="#">Privacy Policy</a>
+        <a class="text-tertiary hover:text-on-surface transition-colors" href="#">Terms of Service</a>
+        <a class="text-tertiary hover:text-on-surface transition-colors" href="#">System Status</a>
+        <a class="text-tertiary hover:text-on-surface transition-colors" href="#">Network Map</a>
+      </div>
+      
+      <div class="font-label-caps text-xs text-tertiary text-center">
+        © 2026 Webmine Media. All Rights Reserved.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script logic for mobile menu and interactions -->
+  <script>
+    const mobileMenu = document.getElementById('mobile-menu');
+    const trigger = document.getElementById('mobile-menu-trigger');
+    const close = document.getElementById('mobile-menu-close');
+
+    // Menu handlers
+    function openMenu() {
+      mobileMenu.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+      mobileMenu.classList.add('hidden');
+      document.body.style.overflow = 'auto';
+    }
+
+    trigger.addEventListener('click', openMenu);
+    close.addEventListener('click', closeMenu);
+
+    // Close menu when clicking on links
+    ['mobile-link-services', 'mobile-link-process', 'mobile-link-about', 'mobile-link-guarantee'].forEach(id => {
+      document.getElementById(id).addEventListener('click', closeMenu);
+    });
+
+    // Smooth scroll for page anchors
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    // Micro-interactions for buttons
+    document.querySelectorAll('.hard-shadow').forEach(button => {
+      button.addEventListener('mousedown', () => {
+        button.style.transform = 'translate(2px, 2px)';
+      });
+      button.addEventListener('mouseup', () => {
+        button.style.transform = 'translate(0px, 0px)';
+      });
+      button.addEventListener('mouseleave', () => {
+        button.style.transform = 'translate(0px, 0px)';
+      });
+    });
+  </script>
+</body>
+</html>

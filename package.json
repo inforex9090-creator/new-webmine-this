@@ -1,0 +1,21 @@
+{
+  "name": "webmine-media",
+  "version": "1.0.0",
+  "description": "High-velocity web design and cloud hosting infrastructure.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "express",
+    "webmine",
+    "hosting",
+    "design"
+  ],
+  "author": "Webmine Team",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
